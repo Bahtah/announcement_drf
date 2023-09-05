@@ -17,6 +17,7 @@ class Announcement(models.Model):
     main_image = models.ImageField(upload_to="images/announcement/", blank=True, verbose_name='фото')
     created_at = models.DateTimeField(null=True, blank=True, verbose_name='создано')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='обновлено')
+    owner = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='announcement', null=True, blank=True)
     
     class Meta:
         ordering = ('created_at',)
