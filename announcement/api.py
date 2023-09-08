@@ -10,7 +10,7 @@ from .serializers import  AnnouncementSerializer, CategorySerializer, Subcategor
 
 
 class AnnouncementViewSet(ModelViewSet):
-    queryset = Announcement.objects.all()
+    queryset = Announcement.objects.filter(price__gt=2000)
     permission_classes = [isOwnerOrReadOnly]
     serializer_class = AnnouncementSerializer
     pagination_class = AnnouncementPagination

@@ -12,6 +12,7 @@ class AnnouncementSerializer(serializers.ModelSerializer):
         discount_of_price = float(obj.price) * 0.1
         return discount_of_price
     
+
     class Meta:
         model = Announcement
         fields = '__all__'
