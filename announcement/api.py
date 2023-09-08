@@ -6,16 +6,22 @@ from users.permissions import isOwnerOrReadOnly
 from .pagination import AnnouncementPagination
 
 from .models import Announcement, Category, Subcategory
-from .serializers import  AnnouncementSerializer, CategorySerializer, SubcategorySerializer
+from .serializers import AnnouncementSerializer, AnnouncementDetailSerializer, CategorySerializer, SubcategorySerializer
 
 
 class AnnouncementViewSet(ModelViewSet):
-    queryset = Announcement.objects.filter(price__gt=2000)
+    queryset = Announcement.objects.all()
     permission_classes = [isOwnerOrReadOnly]
     serializer_class = AnnouncementSerializer
     pagination_class = AnnouncementPagination
     filter_backends = [SearchFilter]
     search_fields = ['title', 'description']
+    
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return AnnouncementDetailSerializer
+        else:
+            return AnnouncementSerializer
     
 
 class CategoryViewSet(ModelViewSet):    

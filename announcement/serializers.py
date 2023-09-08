@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Announcement, Category, Subcategory
 
 
-class AnnouncementSerializer(serializers.ModelSerializer):
+class AnnouncementDetailSerializer(serializers.ModelSerializer):
     
     subcategory = serializers.SlugRelatedField(slug_field='title', read_only=True)
     discount = serializers.SerializerMethodField()
@@ -18,7 +18,12 @@ class AnnouncementSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
         
-
+class AnnouncementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Announcement
+        fields = '__all__'
+        
+    
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
